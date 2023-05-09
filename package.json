@@ -1,0 +1,62 @@
+{
+  "name": "charaka-ecommerce-admin-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/server.js",
+    "dev": "nodemon src/server.ts",
+    "build": "tsc --project .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prisma-generate": "prisma generate",
+    "prisma-migrate": "prisma migrate dev"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "uploads/*"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^4.1.1",
+    "@types/mime": "^3.0.1",
+    "@types/multer": "^1.4.7",
+    "async": "^3.2.4",
+    "aws-sdk": "^2.1196.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "docusign-esign": "^5.18.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-validator": "^6.14.2",
+    "faker": "^6.6.6",
+    "gm": "^1.23.1",
+    "handlebars": "^4.7.7",
+    "image-size": "^1.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "lts": "^1.2.0",
+    "mime": "^3.0.0",
+    "moment": "^2.29.4",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.7.7",
+    "randomstring": "^1.2.2",
+    "stripe": "^10.2.0",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.4.0",
+    "@types/express": "^4.17.13",
+    "nodemon": "^2.0.19",
+    "prisma": "^4.1.1",
+    "typescript": "^4.7.4"
+  },
+  "prisma": {
+    "schema": "src/prisma/schema.prisma",
+    "seed": "ts-node src/prisma/seed.ts"
+  }
+}
