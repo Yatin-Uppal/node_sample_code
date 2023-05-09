@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+
+
+model User {
+  id                String              @id @default(cuid())
+  email             String              @unique
+  firstName         String              @map("first_name")
+  lastName          String              @map("last_name")
+  password          String
+  roleId            String              @map("role_id")
+  role              Role                @relation(fields: [roleId], references: [id])
+  createdBy         Boolean?             @default(false)@map("created_by")
+  createdAt         DateTime            @default(now()) @map("created_at")
+  updatedAt         DateTime           @updatedAt @map("updated_at")
+  userProfile       UserProfile?         
+  userSignDocuments UserSignDocuments[] 
+  cart              Cart[]
+  orders             Order[]
+
+  @@map("users")
+}
+
+model UserProfile {
+  id                String              @id @default(cuid())
+  userId            String              @unique  @map("user_id")
+  user              User?               @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  phone             String?
+  avatar            String?
+  address           String?
+  createdAt         DateTime            @default(now()) @map("created_at")
+  updatedAt         DateTime           @updatedAt @map("updated_at")
+
+  @@map("user_profiles")
+}
+
+enum Roles {
+  Admin
+  Customer
+}
+
+model Role {
+  id                String              @id @default(cuid())
+  name              Roles               @unique
+  createdAt         DateTime            @default(now()) @map("created_at")
+  updatedAt         DateTime?           @updatedAt @map("updated_at")
+  users              User[]
+
+  @@map("roles")
+}
